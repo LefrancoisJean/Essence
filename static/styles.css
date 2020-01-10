@@ -1,0 +1,52 @@
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 12px;
+    }
+
+canvas {
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+}
+
+table {
+    border-collapse: collapse;
+}
+
+div {
+    max-width: 800px;
+    height: 400px;
+}
+
+/* Zebra striping */
+tr:nth-of-type(odd) {
+    background: #e6e6ff;
+}
+
+th {
+    background: #009;
+    color: white;
+    font-weight: bold;
+}
+
+td, th {
+    padding: 6px;
+    border: 1px solid #3333ff;
+    text-align: left;
+}
+
+tr:hover {
+    background: #bbb
+}
+
+a {
+    color: white;
+}
+
+/*css pour le tri du tableau*/
+table.sortable thead {
+    background-color:#eee;
+    color:#666666;
+    font-weight: bold;
+    cursor: pointer;
+}

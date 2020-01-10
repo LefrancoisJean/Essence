@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <title>Liste des stations</title>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+  <h1>Liste des stations pour {{ code_postal }}</h1>
+  <table class="sortable">
+    <tr>
+      <th>Ville</th>
+      <th>Adresse</th>
+      <th>Horaires</th>
+      <th>Services</th>
+      <th>Prix</th>
+    </tr>
+    {%- for station in result.values() %}
+      <tr>
+          <td>{{ station.ville.capitalize() }}</td>
+          <td>{{ station.adresse.capitalize() }}</td>
+          <td>
+            {%- if station.horaires is defined -%}
+              {%- for key, value in station.horaires.items() %}
+              <li>
+                {% if key == '@automate-24-24' %}
+                  <li>Automate 24/24</li>
+                {% elif key == 'jour' %}
+                  {% for jour in value %}
+                    <li>{{ jour['@nom'] }} :
+                        {% if jour['@ferme'] != '' %}
+                          Fermé
+                        {% else %}
+                          {% if jour.horaire is defined %}
+                            {{ jour.horaire['@ouverture'] }} :  {{ jour.horaire['@fermeture'] }}
+                          {% else %}
+                            24/24
+                          {% endif %}
+                        {% endif %}
+                    </li>
+                  {% endfor %}
+                {% endif %}
+              </ul>
+              {%- endfor %}
+          {% else %}
+            Horaires non renseignés
+          {% endif %}
+          </td>
+          <td>
+            {%- for service in station.services.service %}
+            <ul>
+              <li>{{ service }}</li>
+            </ul>
+            {%- endfor %}
+          </td>
+          <td>
+            {%- for carbu in station.prix %}
+            <ul>
+              <li>{{ carbu['@nom'] }} : {{ carbu['@valeur'] }} (M à J : {{ carbu['@maj'] }})</li>
+            </ul>
+            {%- endfor %}
+          </td>
+      </tr>
+    {%- endfor %}
+  </table>
+  <script src="{{ url_for('static', filename='sorttable.js') }}"></script>
+</body>
+</html>
