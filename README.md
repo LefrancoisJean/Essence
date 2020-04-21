@@ -1,4 +1,4 @@
 # Essence
-Petite appli pour trouver les stations services près de chez vous
+Petite appli en python pour trouver les stations services, les prix des carburants, les horaires et services disponibles
 
-Pour la faire fonctionner, il faut avoir installer Python3. Puis lancer le run.bat et rentrer le code postal de la ville.
+Les librairies neccessaires à installer sont Flask, xmltodict, zipfile
